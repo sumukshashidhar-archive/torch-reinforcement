@@ -2,10 +2,10 @@
 Level 0 Game. XOR Response Bit
 Author: Sumuk Shashidhar (sumuk [at] sumuk.org)
 """
-import typing as t
 from random import randint
-class ResponseBit:
 
+
+class ResponseBit:
     def __init__(self) -> None:
         """
         Initialize the ResponseBit Game
@@ -35,7 +35,7 @@ class ResponseBit:
             The value of the bit
         """
         return self.value
-    
+
     def take_response(self, response: int) -> bool:
         """
         Take a response from the player and returns whether or not you won
@@ -57,4 +57,3 @@ class ResponseBit:
 if __name__ == "__main__":
     rb = ResponseBit()
     print(rb.get_value())
-    
