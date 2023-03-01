@@ -35,7 +35,7 @@ class ResponseBitWrapper():
         None
         """
         self.game = ResponseBit()
-        self.iterations += 1
+        self.iterations = 0
 
     def play_step(self, action: int) -> tuple:
         """

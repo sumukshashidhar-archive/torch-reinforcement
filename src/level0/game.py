@@ -62,6 +62,7 @@ class ResponseBit:
             return True
         else:
             # if it isn't, we return False
+            self.value = randint(0, 1)
             return False
 
 

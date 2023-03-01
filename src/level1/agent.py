@@ -7,7 +7,7 @@ import random
 from helper import plot
 MAX_MEMORY = 100_000
 BATCH_SIZE = 10
-LR = 0.001 # learning rate
+LR = 0.1 # learning rate
 
 class Agent:
 
@@ -16,13 +16,16 @@ class Agent:
         self.epsilon = 0 # randomness
         self.gamma = 0.9 # discount rate
         self.memory = deque(maxlen=MAX_MEMORY) # popleft()
-        self.model = LinearQNet(1, 16, 1)
+        self.model = LinearQNet(1, 32, 2)
         self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
+
+    
 
     def get_state(self, game: Wrapper) -> int:
         # we want to return the challenge bit only as the state
         return np.array([game.game.get_value()], dtype=np.int32)
-        
+
+
     def remember(self, state: int, action: int, reward: float, next_state: int, done: bool) -> None:
         self.memory.append((state, action, reward, next_state, done))
 
@@ -48,8 +51,7 @@ class Agent:
         else:
             current_state = torch.tensor(state, dtype=torch.float)
             prediction = self.model(current_state)
-            print("Actual Prediction: ", prediction)
-            final_move = 1 if float(prediction[0]) > 0 else 0
+            final_move = 1 if float(prediction[0]) > 0.5 else 0
         print("State: ", state)
         print("Predicted Final Move: ", final_move)
         return final_move
